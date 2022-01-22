@@ -1,0 +1,11 @@
+src/
+webpack.config.js
+.idea
+docs
+tsconfig.json
+.gitignore
+site/*
+dist/*
+.nvmrc
+.prettierrc
+.github

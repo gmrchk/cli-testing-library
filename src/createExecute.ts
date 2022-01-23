@@ -56,5 +56,7 @@ export const createExecute =
                     stderr: output.stderr,
                 });
             });
+
+            shell.unref();
         });
     };

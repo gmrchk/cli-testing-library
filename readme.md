@@ -16,9 +16,22 @@ Small but powerful library for testing CLI the way they are used.
     <a href="https://github.com/gmrchk/cli-testing-library/actions/workflows/test.yml"><img src="https://github.com/gmrchk/cli-testing-library/actions/workflows/test.yml/badge.svg" alt="Test"></a>
 </p>
 
+- [Motivation](#motivation)
 - [Installation](#installation)
 - [Usage](#usage)
-- [API](#public-api-methods)
+- [API](#api)
+  - [execute](#execute)
+  - [spawn](#spawn)
+  - [cleanup](#cleanup)
+  - [path](#path)
+  - [writeFile](#writeFile)
+  - [readFile](#readFile)
+  - [removeFile](#removeFile)
+  - [removeDir](#removeDir)
+  - [ls](#ls)
+  - [exists](#exists)
+  - [makeDir](#makeDir)
+  - [makeDir](#makeDir)
 - [Contributions](#contributions)
 - [License](#license)
 

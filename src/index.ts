@@ -40,12 +40,19 @@ export const prepareEnvironment = async (): Promise<CLITestEnvironment> => {
     const hasCalledCleanup: {
         current: boolean;
     } = { current: false };
+    const startedTasks: { current: ChildProcessWithoutNullStreams | null }[] =
+        [];
     const tempDir = await fsMakeTempDir(
         path.join(tmpdir(), 'cli-testing-library-')
     );
     const relative = (p: string) => path.resolve(tempDir, p);
     const cleanup = async () => {
         hasCalledCleanup.current = true;
+
+        startedTasks.forEach((task) => {
+            task.current?.kill(0);
+        });
+
         await fsRemoveDir(tempDir, { recursive: true });
     };
 
@@ -56,7 +63,17 @@ export const prepareEnvironment = async (): Promise<CLITestEnvironment> => {
             runFrom?: string
         ) => {
             const output = new Output();
-            const scopedExecute = createExecute(tempDir, output);
+            const currentProcessRef: {
+                current: ChildProcessWithoutNullStreams | null;
+            } = { current: null };
+
+            const scopedExecute = createExecute(
+                tempDir,
+                output,
+                currentProcessRef
+            );
+
+            startedTasks.push(currentProcessRef);
 
             return await scopedExecute(runner, command, runFrom);
         };
@@ -75,9 +92,11 @@ export const prepareEnvironment = async (): Promise<CLITestEnvironment> => {
             const scopedExecute = createExecute(
                 tempDir,
                 output,
-                exitCodeRef,
-                currentProcessRef
+                currentProcessRef,
+                exitCodeRef
             );
+
+            startedTasks.push(currentProcessRef);
 
             currentProcessPromise = scopedExecute(runner, command, runFrom);
 

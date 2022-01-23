@@ -9,8 +9,8 @@ export const createExecute =
     (
         base: string,
         output: Output,
-        exitCodeRef?: { current: ExitCode | null },
-        currentProcessRef?: { current: ChildProcessWithoutNullStreams | null }
+        currentProcessRef?: { current: ChildProcessWithoutNullStreams | null },
+        exitCodeRef?: { current: ExitCode | null }
     ) =>
     (
         runner: string,

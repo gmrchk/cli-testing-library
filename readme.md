@@ -6,15 +6,42 @@ You should:
 * Replace `linear-gradient(` colors
 
 ---
-# CLI Testing Library
-Small but powerful library for testing CLI the way they are used.  
-
+<h1 align="center">CLI Testing Library</h1>
+<p align="center">
+  Small but powerful library for testing CLI the way they are used.
+</p>
 <p align="center">
     <a href="https://www.npmjs.com/package/@gmrchk/cli-testing-library"><img src="https://img.shields.io/npm/v/@gmrchk/cli-testing-library.svg?color=brightgreen" alt="npm version"></a>
     <img src="https://img.shields.io/bundlephobia/minzip/@gmrchk/cli-testing-library.svg" alt="Gzip Size"> 
     <a href="https://github.com/gmrchk/LibName/blob/master/LICENSE"><img src="https://img.shields.io/github/license/gmrchk/LibName.svg" alt="License"></a>
     <a href="https://github.com/gmrchk/cli-testing-library/actions/workflows/test.yml"><img src="https://github.com/gmrchk/cli-testing-library/actions/workflows/test.yml/badge.svg" alt="Test"></a>
 </p>
+
+```javascript
+it('testing CLI the way they are used', async () => {
+    const { spawn, cleanup } = await prepareEnvironment();
+    const { wait, waitForText, waitForFinish, writeText, getStdout, getStderr, getExitCode, kill, debug, pressKey } = await spawn(
+        'node',
+        './my-cli.js start'
+    );
+
+    debug();   // enables logging to console from the tested program
+    
+    await wait(1000);   // wait one second
+    await waitForText('Enter your name:');   // wait for question
+    await writeText('John');   // answer the question above
+    await pressKey('enter');   // confirm with Enter
+    await waitForFinish();   // wait for program to finish
+
+    kill(); // would kill the program if we didn't wait for finish above
+
+    getStdout();   // ['Enter your name:', ...]
+    getStderr();   // [] empty since no errors encountered
+    getExitCode();   // 0 since we finished successfully
+  
+    await cleanup();    // cleanup after test
+});
+```
 
 - [Motivation](#motivation)
 - [Installation](#installation)

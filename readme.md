@@ -12,8 +12,7 @@ You should:
 </p>
 <p align="center">
     <a href="https://www.npmjs.com/package/@gmrchk/cli-testing-library"><img src="https://img.shields.io/npm/v/@gmrchk/cli-testing-library.svg?color=brightgreen" alt="npm version"></a>
-    <img src="https://img.shields.io/bundlephobia/minzip/@gmrchk/cli-testing-library.svg" alt="Gzip Size"> 
-    <a href="https://github.com/gmrchk/LibName/blob/master/LICENSE"><img src="https://img.shields.io/github/license/gmrchk/LibName.svg" alt="License"></a>
+    <a href="https://github.com/gmrchk/LibName/blob/master/LICENSE"><img src="https://img.shields.io/github/license/gmrchk/cli-testing-library.svg" alt="License"></a>
     <a href="https://github.com/gmrchk/cli-testing-library/actions/workflows/test.yml"><img src="https://github.com/gmrchk/cli-testing-library/actions/workflows/test.yml/badge.svg" alt="Test"></a>
 </p>
 

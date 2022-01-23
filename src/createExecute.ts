@@ -32,10 +32,14 @@ export const createExecute =
                 .map((arg) =>
                     arg.includes('./') ? path.join(process.cwd(), arg) : arg
                 );
-            const shell = spawn(runner, args, {
-                cwd: runFrom ? path.join(base, runFrom) : path.join(base),
-                shell: true,
-            });
+            let shell: ChildProcessWithoutNullStreams | null = spawn(
+                runner,
+                args,
+                {
+                    cwd: runFrom ? path.join(base, runFrom) : path.join(base),
+                    shell: true,
+                }
+            );
 
             shell.stdin.setDefaultEncoding('utf8');
 
@@ -58,5 +62,6 @@ export const createExecute =
             });
 
             shell.unref();
+            shell = null;
         });
     };

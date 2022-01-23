@@ -51,6 +51,12 @@ export const prepareEnvironment = async (): Promise<CLITestEnvironment> => {
 
         startedTasks.forEach((task) => {
             task.current?.kill(0);
+            task.current?.stdin.end();
+            task.current?.stdin.destroy();
+            task.current?.stdout.destroy();
+            task.current?.stderr.destroy();
+
+            task.current = null;
         });
 
         await fsRemoveDir(tempDir, { recursive: true });
@@ -120,7 +126,7 @@ export const prepareEnvironment = async (): Promise<CLITestEnvironment> => {
             };
             const wait = (delay: number): Promise<void> => {
                 return new Promise((resolve) => {
-                    setTimeout(resolve, delay);
+                    setTimeout(resolve, delay).unref();
                 });
             };
             const waitForFinish = async (): Promise<ExecResult> => {

@@ -6,9 +6,10 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "outDir": "lib",
     "listEmittedFiles": true,
-    "declaration": true,
+    "declaration": true
   },
-  "include": ["**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules/**/*"]
 }

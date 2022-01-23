@@ -1,6 +1,6 @@
 module.exports = {
     siteMetadata: {
-        siteUrl: `https://LibNamegmrchk.com`,
+        siteUrl: `https://cli-testing-librarygmrchk.com`,
     },
     plugins: [
         'gatsby-plugin-react-helmet',
@@ -9,7 +9,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: `LibName.gmrchk.com`,
+                name: `cli-testing-library.gmrchk.com`,
                 short_name: `LibTitle`,
                 start_url: `/`,
                 background_color: `#040404`,

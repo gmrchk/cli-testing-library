@@ -1,17 +1,16 @@
 # Lib template
 You should: 
-* Replace any occurences of LibName
 * Replace any occurences of LibTitle
 * Replace `site/src/images/icon.png`
 * Replace `site/src/images/og.png`
 * Replace `linear-gradient(` colors
 
 ---
-# LibName
+# CLI testing library
 
 <p align="center">
-    <a href="https://www.npmjs.com/package/LibName"><img src="https://img.shields.io/npm/v/LibName.svg?color=brightgreen" alt="npm version"></a>
-    <img src="https://img.shields.io/bundlephobia/minzip/LibName.svg" alt="Gzip Size"> 
+    <a href="https://www.npmjs.com/package/@gmrchk/cli-testing-library"><img src="https://img.shields.io/npm/v/@gmrchk/cli-testing-library.svg?color=brightgreen" alt="npm version"></a>
+    <img src="https://img.shields.io/bundlephobia/minzip/@gmrchk/cli-testing-library.svg" alt="Gzip Size"> 
     <a href="https://github.com/gmrchk/LibName/blob/master/LICENSE"><img src="https://img.shields.io/github/license/gmrchk/LibName.svg" alt="License"></a>
 </p>
 

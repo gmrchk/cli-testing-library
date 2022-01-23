@@ -127,7 +127,7 @@ export const Header = () => {
                     </ListItem>
                     <ListItem>
                         <Link
-                            href="https://github.com/gmrchk/LibName"
+                            href="https://github.com/gmrchk/cli-testing-library"
                             data-blobity-radius="22"
                             data-blobity-magnetic="false"
                             noPadding

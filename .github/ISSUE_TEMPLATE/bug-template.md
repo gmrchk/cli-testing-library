@@ -13,7 +13,7 @@ Describe your issue here...
 **LibTitle config or any additional relevant code used**:
 
 ```javascript
-const LibName = LibTitle();
+const cliTesting = LibTitle();
 ```
 
 **Before creating this issue, did you think of...**:

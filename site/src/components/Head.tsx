@@ -23,7 +23,7 @@ export const Head: React.FC<{ title: string }> = ({ title }) => {
             <link rel="shortcut icon" href={fav} />
 
             <meta property="og:title" content={title} />
-            <meta property="og:url" content="https://LibName.gmrchk.com/" />
+            <meta property="og:url" content="https://cli-testing-library.gmrchk.com/" />
             <meta property="og:image" content={og} />
             <meta
                 property="og:description"

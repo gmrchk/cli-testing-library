@@ -25,7 +25,7 @@ export default () => {
                 <Button href="#">
                     Some button
                 </Button>
-                <Button href="https://github.com/gmrchk/LibName#readme" ghost>
+                <Button href="https://github.com/gmrchk/cli-testing-library#readme" ghost>
                     Documentation
                 </Button>
             </Section>
@@ -49,7 +49,7 @@ export default () => {
             </Section>
             <Section id="buy" center last>
                 <Headline>Ready to get started?</Headline>
-                <Button href="https://github.com/gmrchk/LibName#readme">
+                <Button href="https://github.com/gmrchk/cli-testing-library#readme">
                     Documentation
                 </Button>
             </Section>

@@ -1,7 +1,7 @@
 {
   "name": "@gmrchk/cli-testing-library",
   "version": "0.1.0",
-  "description": "Simple and complete CLI testing utilities that encourage good testing practices.",
+  "description": "Small but powerful library for testing CLI the way they are used by people.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {

@@ -5,15 +5,12 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "dev": "concurrently 'npm run watch:lib' 'npm run watch:site'",
+    "dev": "npm run watch:lib",
     "build:cleanup": "rm -rf lib && rm -rf dist",
     "build:lib": "tsc --project tsconfig.build.json",
-    "build:site": "npm run build --prefix site",
-    "build": "npm run build:cleanup && npm run build:lib && npm run build:site",
-    "build:ci": "npm i --prefix site && npm run build",
-    "site:install": "npm install --prefix site",
+    "build": "npm run build:cleanup && npm run build:lib",
+    "build:ci": "npm run build",
     "prepare": "npm run build:lib",
-    "watch:site": "npm run develop --prefix site",
     "watch:lib": "tsc --watch --project tsconfig.build.json",
     "test": "jest test"
   },

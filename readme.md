@@ -8,7 +8,7 @@ You should:
 ---
 <h1 align="center">CLI Testing Library</h1>
 <p align="center">
-  Small but powerful library for testing CLI the way they are used.
+  Small but powerful library for testing CLI the way they are used by people.
 </p>
 <p align="center">
     <a href="https://www.npmjs.com/package/@gmrchk/cli-testing-library"><img src="https://img.shields.io/npm/v/@gmrchk/cli-testing-library.svg?color=brightgreen" alt="npm version"></a>
@@ -18,27 +18,32 @@ You should:
 
 ```javascript
 it('testing CLI the way they are used', async () => {
-    const { spawn, cleanup } = await prepareEnvironment();
-    const { wait, waitForText, waitForFinish, writeText, getStdout, getStderr, getExitCode, kill, debug, pressKey } = await spawn(
+    const { execute, spawn, cleanup, ls } = await prepareEnvironment();
+
+    await execute(
         'node',
-        './my-cli.js start'
+        './my-cli.js generate-file file.txt'
     );
 
-    debug();   // enables logging to console from the tested program
+    expect(ls('./')).toBe(`
+        Array [
+          "file.txt",
+        ]
+    `);
     
-    await wait(1000);   // wait one second
-    await waitForText('Enter your name:');   // wait for question
-    await writeText('John');   // answer the question above
-    await pressKey('enter');   // confirm with Enter
-    await waitForFinish();   // wait for program to finish
-
-    kill(); // would kill the program if we didn't wait for finish above
-
-    getStdout();   // ['Enter your name:', ...]
-    getStderr();   // [] empty since no errors encountered
-    getExitCode();   // 0 since we finished successfully
+    const { waitForText, waitForFinish, writeText, pressKey, getExitCode } = await spawn(
+        'node',
+        './my-cli.js ask-for-name'
+    );
+    
+    await waitForText('Enter your name:');
+    await writeText('John');
+    await pressKey('enter');
+    await waitForFinish();
+    
+    expect(getExitCode()).toBe(0);
   
-    await cleanup();    // cleanup after test
+    await cleanup();
 });
 ```
 
@@ -63,13 +68,15 @@ it('testing CLI the way they are used', async () => {
 
 
 ## Motivation
-Just like [Testing Library](https://testing-library.com/), this library aims to provide a way to test the flows actually encountered by the users.
-While there are certainly ways to unit tests various parts of your CLI without actually running the CLI itself, a test providing an identical flow to what the user of the CLI would do provides a much better reassurance of the things working the way they should.
+Just like [Testing Library](https://testing-library.com/), this library aims to provide a way to test the flows that are actually encountered by the users.
+While there are certainly ways to unit tests various parts of your CLI without actually running the CLI itself, a test providing an identical flow to what the user of the CLI would do provides much better reassurance of the things working the way they should.
 
-Although this library is written and tested using JavaScript tools (TypeScript, Jest), it works directly with shell, and so it can be used to test CLIs written in any language.  
+Although this library is written and tested using JavaScript tools (TypeScript, Jest), it works directly with shell, and so it can be used to test CLIs written in any language, and with other JavaScript test frameworks.  
 
+Just like with any test, the key for testing CLI is consistency between runs. 
 Since most CLIs will at least in some scenarios read or manipulate file system, it would be hard for us to run tests without affecting other tests manipulating the same filesystem.
 That's why this library creates completely enclosed environment for each test, including the filesystem. 
+The same goes for the system specific differences in input or output of the process, which is normalized by the library. 
 
 ## Installation
 The best way to consume CLI Testing Library is as the npm package.
@@ -114,7 +121,7 @@ describe('My CLI', () => {
 
 The `prepareEnvironment` returns a bunch of helpers described further. 
 An important part to notice is the use of `cleanup` function returned by the `prepareEnvironment`. 
-Just like the fully independent environment is created per test, it is also fully cleaned up this way, including any memory leaks in your CLI itself which could prevent tests from running correctly.   
+Just like the fully independent environment is created per test, it is also fully cleaned up this way, including any memory leaks in your CLI itself which could prevent tests from running correctly or hanging.   
 
 ## API
 As mentioned before, `prepareEnvironment` is at the core of this library. 
@@ -130,7 +137,7 @@ This should be used for most CLI commands that have no interactive prompts as a 
 The function accepts three parameter: 
 1. `runner` - the command used for running shell process, like `node`.
 2. `command` - any arguments provided to the runner, such as location of the file to execute. It can also contain any arguments or options you might wish to include for you CLI, like `./my-cli.js --help`. In combination with the `runner` it should be the way you would run your CLI.  
-2. `runFrom` **optional** sub path to run the command from. The sub path is automatically relatives to the enclosed filesystem created.    
+3. `runFrom` **optional** sub path to run the command from. The sub path is relative to the enclosed filesystem automatically created as part of each environment.    
 
 The function return several things: 
 * `code` - the exit code of the program. Usually if the value is `0`, the program finished successfully.
@@ -157,22 +164,22 @@ it('program runs successfully', async () => {
 
 ### spawn
 Similar to `execute`, it serves to run a command. 
-However, instead of simply waiting for the program, it allows you to control it.
+However, instead of simply waiting for the program to finish, it allows you to control it.
 
 This should be used for most CLI commands that have interactive prompts as a part of the program.
 
 The function accepts three parameter:
 1. `runner` - the command used for running shell process, like `node`.
 2. `command` - any arguments provided to the runner, such as location of the file to execute. It can also contain any arguments or options you might wish to include for you CLI, like `./my-cli.js --help`. In combination with the `runner` it should be the way you would run your CLI.
-2. `runFrom` **optional** sub path to run the command from. The sub path is automatically relatives to the enclosed filesystem created.
+3. `runFrom` **optional** sub path to run the command from. The sub path is relative to the enclosed filesystem automatically created as part of each environment.
 
-The function return several bunch of methods to communicate/control the tested CLI program:
+The function return a bunch of methods to communicate/control the tested CLI program:
 * `wait` - wait for given amount of miliseconds.
 * `waitForText` - wait for given string in output received in `stdout` or `stderr` output of the CLI. For example, it can be used to wait for a certain question from the CLI.
 * `waitForFinish` - wait for the program to finish and exit.
 * `writeText` - input text into the program. It can be used to answer any text questions from the CLI.
-* `getStdout` - get the current array of text `stdout` lines. It can change all the way until the program has finished. 
-* `getStderr` - get the current array of text `stderr` lines. It can change all the way until the program has finished.
+* `getStdout` - get the current array of text lines `stdout` lines. It can change all the way until the program has finished. 
+* `getStderr` - get the current array of text lines `stderr` lines. It can change all the way until the program has finished.
 * `getExitCode` - get the exit code of a program. Usually if the value is `0`, the program finished successfully. If the program hasn't finished, the value is `null`. 
 * `kill` - kill the program.
 * `debug` - enable logging of the running program into the console where the test is running. As name suggest, this is only for debugging purposes.
@@ -326,7 +333,7 @@ Checks whether file exists inside of the created filesystem. Accepts:
 it('program cleanup', async () => {
     const { cleanup, ls } = await prepareEnvironment();
 
-    await ls('./'); // ['subfolder', 'some-file.txt']
+    await exists('./file.txt'); // true
 
     await cleanup();
 });
@@ -351,7 +358,7 @@ it('program cleanup', async () => {
 Any contributions are welcome!
 
 Remember, if merged, your code will be used as part of a free product. 
-By submitting a Pull Request, you are giving your consent for your code to be integrated into LibTitle as part of a commercial product.
+By submitting a Pull Request, you are giving your consent for your code to be integrated into CLI Testing Library as part of a free open-source product.
 
 ## License
 Check the LICENSE.md file in the root of this repository tree for closer details.

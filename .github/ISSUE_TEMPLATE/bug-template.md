@@ -10,10 +10,18 @@ assignees: ''
 **Describe your issue**:
 Describe your issue here...
 
-**LibTitle config or any additional relevant code used**:
+**The code of the library usage**:
 
 ```javascript
-const cliTesting = LibTitle();
+import { prepareEnvironment } from '@gmrchk/cli-testing-library';
+
+it('program', async () => {
+    const { cleanup, path } = await prepareEnvironment();
+    
+    // your test...
+    
+    await cleanup();
+});
 ```
 
 **Before creating this issue, did you think of...**:

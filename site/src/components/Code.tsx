@@ -4,10 +4,11 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styled from 'styled-components';
 
 type Props = {
-    language: 'jsx' | 'html';
+    language: 'jsx' | 'html' | 'javascript';
 };
 const Wrapper = styled.div`
     position: relative;
+    width: 100%;
 `;
 const Label = styled.div`
     position: absolute;
@@ -29,10 +30,7 @@ export const InlineCode = styled.code`
     border-radius: 3px;
 `;
 
-export const Code: React.FC<Props> = ({
-    children,
-    language,
-}) => {
+export const Code: React.FC<Props> = ({ children, language }) => {
     return (
         <Wrapper>
             <SyntaxHighlighter

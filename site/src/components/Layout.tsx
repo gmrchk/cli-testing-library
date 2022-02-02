@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 type Props = {
     reversed?: boolean;
+    thin?: boolean;
 };
 
 export const media = {
@@ -59,8 +60,24 @@ const Wrapper = styled.div<Props>`
             }
         }
     `}
+
+    ${({ thin }) =>
+        thin &&
+        `
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            
+            @media ${media.midUp} {
+                width: 920px;
+            }
+    `}
 `;
 
-export const Layout: React.FC<Props> = ({ reversed, children }) => {
-    return <Wrapper reversed={reversed}>{children}</Wrapper>;
+export const Layout: React.FC<Props> = ({ reversed, thin, children }) => {
+    return (
+        <Wrapper reversed={reversed} thin={thin}>
+            {children}
+        </Wrapper>
+    );
 };

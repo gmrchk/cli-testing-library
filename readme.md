@@ -1,14 +1,6 @@
-# Lib template
-You should: 
-* Replace any occurences of LibTitle
-* Replace `site/src/images/icon.png`
-* Replace `site/src/images/og.png`
-* Replace `linear-gradient(` colors
-
----
 <h1 align="center">CLI Testing Library</h1>
 <p align="center">
-  Small but powerful library for testing CLI the way they are used by people.
+  Small but powerful library for testing CLI the way it is used by people.
 </p>
 <p align="center">
     <a href="https://www.npmjs.com/package/@gmrchk/cli-testing-library"><img src="https://img.shields.io/npm/v/@gmrchk/cli-testing-library.svg?color=brightgreen" alt="npm version"></a>

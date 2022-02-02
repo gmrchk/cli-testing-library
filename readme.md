@@ -115,6 +115,8 @@ The `prepareEnvironment` returns a bunch of helpers described further.
 An important part to notice is the use of `cleanup` function returned by the `prepareEnvironment`. 
 Just like the fully independent environment is created per test, it is also fully cleaned up this way, including any memory leaks in your CLI itself which could prevent tests from running correctly or hanging.   
 
+Note that the file path listed should be relative the path the test is running from. This is usually the root path of the project.  
+
 ## API
 As mentioned before, `prepareEnvironment` is at the core of this library. 
 Any test begins with creating an independent environment. 

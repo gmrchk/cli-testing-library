@@ -37,7 +37,6 @@ export const createExecute =
                 args,
                 {
                     cwd: runFrom ? path.join(base, runFrom) : path.join(base),
-                    shell: true,
                 }
             );
 

@@ -126,7 +126,7 @@ export const prepareEnvironment = async (): Promise<CLITestEnvironment> => {
             };
             const wait = (delay: number): Promise<void> => {
                 return new Promise((resolve) => {
-                    setTimeout(resolve, delay).unref();
+                    setTimeout(resolve, delay);
                 });
             };
             const waitForFinish = async (): Promise<ExecResult> => {

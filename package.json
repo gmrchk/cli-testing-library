@@ -1,6 +1,6 @@
 {
   "name": "@gmrchk/cli-testing-library",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Small but powerful library for testing CLI the way it is used by people.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

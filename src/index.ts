@@ -59,7 +59,7 @@ export const prepareEnvironment = async (): Promise<CLITestEnvironment> => {
             task.current = null;
         });
 
-        await fsRemoveDir(tempDir, { recursive: true });
+        await fsRemove(tempDir, { recursive: true });
     };
 
     try {

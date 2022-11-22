@@ -121,8 +121,6 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
             expect(process.stdout.write).toBeCalled();
 
             await cleanup();
-
-            await cleanup();
         });
     });
 

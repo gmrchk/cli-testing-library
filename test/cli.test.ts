@@ -31,9 +31,9 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
                 './test/testing-cli-entry.js'
             );
 
-            expect(stdout).toMatchInlineSnapshot(`Array []`);
+            expect(stdout).toMatchInlineSnapshot(`[]`);
             expect(stderr).toMatchInlineSnapshot(`
-                Array [
+                [
                   "testing-cli-entry.js <command>",
                   "Commands:",
                   "testing-cli-entry.js print [input]  print a string",
@@ -82,9 +82,9 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
 
             kill('SIGINT');
 
-            expect(getStderr()).toMatchInlineSnapshot(`Array []`);
+            expect(getStderr()).toMatchInlineSnapshot(`[]`);
             expect(getStdout()).toMatchInlineSnapshot(`
-                Array [
+                [
                   "? Pick option: › - Use arrow-keys. Return to submit.",
                   "❯   First",
                   "Second",
@@ -121,8 +121,6 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
             expect(process.stdout.write).toBeCalled();
 
             await cleanup();
-
-            await cleanup();
         });
     });
 
@@ -136,7 +134,7 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
             );
 
             expect(stdout).toMatchInlineSnapshot(`
-                            Array [
+                            [
                               "testing-cli-entry.js <command>",
                               "Commands:",
                               "testing-cli-entry.js print [input]  print a string",
@@ -148,7 +146,7 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
                               "-v, --verbose  Run with verbose logging                              [boolean]",
                             ]
                     `);
-            expect(stderr).toMatchInlineSnapshot(`Array []`);
+            expect(stderr).toMatchInlineSnapshot(`[]`);
             expect(code).toBe(0);
 
             await cleanup();
@@ -165,7 +163,7 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
             );
 
             expect(stdout).toMatchInlineSnapshot(`
-                            Array [
+                            [
                               "cli:print: print-this-string",
                             ]
                     `);
@@ -181,7 +179,7 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
             );
 
             expect(stdout).toMatchInlineSnapshot(`
-                            Array [
+                            [
                               "Running in verbose mode.",
                               "cli:print: print-this-string",
                             ]
@@ -227,7 +225,7 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
             await waitForFinish();
 
             expect(getStdout()).toMatchInlineSnapshot(`
-                Array [
+                [
                   "? Give me a number: ›",
                   "? Give me a number: › 1",
                   "? Give me a number: › 15",
@@ -254,7 +252,7 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
             await waitForFinish();
 
             expect(getStdout()).toMatchInlineSnapshot(`
-                Array [
+                [
                   "? Pick option: › - Use arrow-keys. Return to submit.",
                   "❯   First",
                   "Second",

@@ -7,7 +7,7 @@ describe('environment utils', () => {
         const { ls, path, cleanup } = await prepareEnvironment();
 
         expect(path).toContain('cli-testing-library-');
-        expect(await ls()).toMatchInlineSnapshot(`Array []`);
+        expect(await ls()).toMatchInlineSnapshot(`[]`);
 
         await cleanup();
     });
@@ -22,7 +22,7 @@ describe('environment utils', () => {
 
         expect(await readFile(FILE_NAME)).toBe(FILE_CONTENT);
         expect(await ls()).toMatchInlineSnapshot(`
-            Array [
+            [
               "testing-file.txt",
             ]
         `);
@@ -41,12 +41,12 @@ describe('environment utils', () => {
 
         expect(await readFile(FILE_NAME)).toBe(FILE_CONTENT);
         expect(await ls()).toMatchInlineSnapshot(`
-            Array [
+            [
               "subfolder",
             ]
         `);
         expect(await ls(FOLDER_NAME)).toMatchInlineSnapshot(`
-            Array [
+            [
               "testing-file.txt",
             ]
         `);
@@ -62,14 +62,14 @@ describe('environment utils', () => {
         await makeDir(FOLDER_NAME);
 
         expect(await ls()).toMatchInlineSnapshot(`
-            Array [
+            [
               "subfolder",
             ]
         `);
 
         await removeDir(FOLDER_NAME);
 
-        expect(await ls()).toMatchInlineSnapshot(`Array []`);
+        expect(await ls()).toMatchInlineSnapshot(`[]`);
 
         await cleanup();
     });

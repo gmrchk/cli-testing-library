@@ -60,7 +60,6 @@ export const createExecute =
                 });
             });
 
-            shell.unref();
             shell = null;
         });
     };

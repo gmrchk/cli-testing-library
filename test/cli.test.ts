@@ -124,6 +124,21 @@ describe('Tests testing the CLI and so, the testing lib itself', () => {
 
             await cleanup();
         });
+
+        it('should escape spaces when needed', async () => {
+            const { spawn, cleanup } = await prepareEnvironment();
+
+            const { getStdout, waitForFinish } = await spawn(
+              'node',
+              './test/testing-cli-entry.js print "some\\ fancy\\ text"'
+            );
+
+            await waitForFinish()
+
+            expect(getStdout()).toContain('cli:print: "some fancy text"');
+
+            await cleanup();
+        });
     });
 
     describe('command:help', () => {

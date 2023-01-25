@@ -2,6 +2,7 @@ import { Output } from './Output';
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { homedir } from 'os';
 import path from 'path';
+import { parseCommand } from './utils';
 
 export type ExitCode = 0 | 1;
 export type ExecResult = { code: ExitCode; stdout: string[]; stderr: string[] };
@@ -27,8 +28,7 @@ export const createExecute =
                 '': '', // you might not see it, but there is a special ESC symbol
             };
 
-            const args = command
-                .split(' ')
+            const args = parseCommand(command)
                 .map((arg) =>
                     arg.includes('./') ? path.join(process.cwd(), arg) : arg
                 );
